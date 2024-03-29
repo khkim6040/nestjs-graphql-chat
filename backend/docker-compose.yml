@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres:10
+    container_name: my_postgres_container
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: khkim
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_DB: chatapp
+    volumes:
+      - my_postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: my_pgadmin_container
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: khkim@khkim.com
+      PGADMIN_DEFAULT_PASSWORD: khkim
+
+volumes:
+  my_postgres_data:
+
+
