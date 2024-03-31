@@ -12,7 +12,7 @@ export class User {
     email?: string;
 
     @Field({nullable: true})
-    avataUrl? : string;
+    avatarUrl? : string;
 
     @Field({nullable: true})
     password?: string;

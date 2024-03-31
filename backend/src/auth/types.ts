@@ -3,7 +3,7 @@ import { User } from "src/user/user.types";
 
 @ObjectType()
 export class RegisterResponse {
-    @Field(()=> UserActivation, {nullable: true})
+    @Field(()=> User, {nullable: true})
     user?: User;
 }
 @ObjectType()
