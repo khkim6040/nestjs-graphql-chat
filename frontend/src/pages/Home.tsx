@@ -6,10 +6,10 @@ import ProtectedRoutes from '../components/ProtectedRoutes';
 function Home() {
   return (
     <MainLayout>
-      <ProtectedRoutes>
+      <>
         <Sidebar />
         HOME PAGE
-      </ProtectedRoutes>
+      </>
     </MainLayout>
   );
 }
