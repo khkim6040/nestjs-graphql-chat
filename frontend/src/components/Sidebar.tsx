@@ -17,6 +17,7 @@ import {
   IconBrandMessenger,
   IconBrandWechat,
   IconLogin,
+  IconSwitchHorizontal,
 } from '@tabler/icons-react';
 
 import { useMutation } from '@apollo/client';
@@ -101,6 +102,7 @@ function Sidebar() {
   const userId = useUserStore((state) => state.id);
   const user = useUserStore((state) => state);
   const setUser = useUserStore((state) => state.setUser);
+  const toggleLoginModal = useGeneralStore((state) => state.toggleLoginModal);
   const [logoutUser, { loading, error }] = useMutation(LOGOUT_USER, {
     onCompleted: () => {
       toggleLoginModal();
@@ -117,7 +119,43 @@ function Sidebar() {
     });
   };
 
-  return <div>Sidebar</div>;
+  return (
+    <Navbar fixed zIndex={100} w={rem(100)} p="md">
+      <Center>
+        <IconBrandMessenger type="mark" size={30} />
+      </Center>
+      <Navbar.Section grow mt={50}>
+        <Stack justify="center" spacing={0}>
+          {userId && links}
+        </Stack>
+      </Navbar.Section>
+      <Navbar.Section>
+        <Stack justify="center" spacing={0}>
+          {userId && (
+            <NavbarLink
+              icon={IconUser}
+              label={'Profile(' + user.fullname + ')'}
+              onClick={toggleProfileSettingsModal}
+            />
+          )}
+
+          {userId ? (
+            <NavbarLink
+              icon={IconLogout}
+              label="Logout"
+              onClick={handleLogout}
+            />
+          ) : (
+            <NavbarLink
+              icon={IconLogin}
+              label="Login"
+              onClick={toggleLoginModal}
+            />
+          )}
+        </Stack>
+      </Navbar.Section>
+    </Navbar>
+  );
 }
 
 export default Sidebar;
